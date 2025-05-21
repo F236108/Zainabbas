@@ -15,14 +15,14 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <AnimatePresence mode="wait">
-        <BrowserRouter>
+      <BrowserRouter>
+        <AnimatePresence>
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
-        </BrowserRouter>
-      </AnimatePresence>
+        </AnimatePresence>
+      </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
 );

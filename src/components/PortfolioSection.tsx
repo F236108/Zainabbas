@@ -12,7 +12,7 @@ const projects = [
     type: "Programming",
     icon: Code,
     tags: ["C++", "Mathematics", "Algorithm"],
-    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=500"
+    image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=500"
   },
   {
     id: 2,
@@ -21,7 +21,7 @@ const projects = [
     type: "Programming",
     icon: Code,
     tags: ["C++", "Data Structures", "File Handling"],
-    image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=500"
+    image: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&q=80&w=500"
   },
   {
     id: 3,
@@ -30,7 +30,7 @@ const projects = [
     type: "Hardware",
     icon: Image,
     tags: ["Circuit Design", "LDR", "Automation"],
-    image: "https://images.unsplash.com/photo-1573051062720-3ba92c8f1615?auto=format&fit=crop&q=80&w=500"
+    image: "https://images.unsplash.com/photo-1530325250172-33d1a3f7cd33?auto=format&fit=crop&q=80&w=500"
   },
   {
     id: 4,
@@ -39,7 +39,7 @@ const projects = [
     type: "Simulation",
     icon: Image,
     tags: ["Multisim", "Electronics", "Timing Circuits"],
-    image: "https://images.unsplash.com/photo-1473091534298-04dcbce3278c?auto=format&fit=crop&q=80&w=500"
+    image: "https://images.unsplash.com/photo-1494614948413-c4b5132a58df?auto=format&fit=crop&q=80&w=500"
   },
   {
     id: 5,
@@ -57,7 +57,7 @@ const projects = [
     type: "Hardware",
     icon: FileText,
     tags: ["Electromagnetics", "Power Systems", "Education"],
-    image: "https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&q=80&w=500"
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=500"
   }
 ];
 
