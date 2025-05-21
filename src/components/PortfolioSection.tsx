@@ -1,7 +1,7 @@
 
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Code, Image, FileText, ExternalLink } from 'lucide-react';
+import { Code, Image, FileText, ExternalLink, Github } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const projects = [
@@ -12,7 +12,7 @@ const projects = [
     type: "Programming",
     icon: Code,
     tags: ["C++", "Mathematics", "Algorithm"],
-    image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=500"
+    image: "https://images.unsplash.com/photo-1587145820266-a5951ee6f620?auto=format&fit=crop&q=80&w=500"
   },
   {
     id: 2,
@@ -21,7 +21,7 @@ const projects = [
     type: "Programming",
     icon: Code,
     tags: ["C++", "Data Structures", "File Handling"],
-    image: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&q=80&w=500"
+    image: "https://images.unsplash.com/photo-1586716402203-79219bede43c?auto=format&fit=crop&q=80&w=500"
   },
   {
     id: 3,
@@ -30,7 +30,7 @@ const projects = [
     type: "Hardware",
     icon: Image,
     tags: ["Circuit Design", "LDR", "Automation"],
-    image: "https://images.unsplash.com/photo-1530325250172-33d1a3f7cd33?auto=format&fit=crop&q=80&w=500"
+    image: "https://images.unsplash.com/photo-1584984793889-6ac1bbe1a2b3?auto=format&fit=crop&q=80&w=500"
   },
   {
     id: 4,
@@ -39,7 +39,7 @@ const projects = [
     type: "Simulation",
     icon: Image,
     tags: ["Multisim", "Electronics", "Timing Circuits"],
-    image: "https://images.unsplash.com/photo-1494614948413-c4b5132a58df?auto=format&fit=crop&q=80&w=500"
+    image: "https://images.unsplash.com/photo-1577124999548-27478542c8c5?auto=format&fit=crop&q=80&w=500"
   },
   {
     id: 5,
@@ -57,7 +57,7 @@ const projects = [
     type: "Hardware",
     icon: FileText,
     tags: ["Electromagnetics", "Power Systems", "Education"],
-    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=500"
+    image: "https://images.unsplash.com/photo-1631019553258-63f8a69b2d1b?auto=format&fit=crop&q=80&w=500"
   }
 ];
 
@@ -133,13 +133,21 @@ const PortfolioSection = () => {
                     ))}
                   </div>
                 </CardContent>
-                <CardFooter>
+                <CardFooter className="flex justify-between">
                   <Button 
                     variant="ghost" 
-                    className="text-electric hover:bg-electric/10 hover:text-electric w-full group transition-all duration-300"
+                    className="text-electric hover:bg-electric/10 hover:text-electric group transition-all duration-300"
                   >
                     <span>View Details</span>
                     <ExternalLink className="ml-2 h-4 w-4 transform transition-all duration-300 group-hover:translate-x-1" />
+                  </Button>
+                  <Button 
+                    variant="outline"
+                    className="text-electric border-electric hover:bg-electric/10 group transition-all duration-300"
+                    onClick={() => window.open('https://github.com/F236108', '_blank')}
+                  >
+                    <Github className="mr-2 h-4 w-4" />
+                    <span>GitHub</span>
                   </Button>
                 </CardFooter>
               </Card>
