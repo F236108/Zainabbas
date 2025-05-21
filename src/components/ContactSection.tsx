@@ -1,12 +1,9 @@
-
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Mail, Phone, Linkedin, Instagram, Send } from 'lucide-react';
-
 const ContactSection = () => {
-  return (
-    <section id="contact" className="py-20 bg-background">
+  return <section id="contact" className="py-20 bg-background">
       <div className="section-container">
         <h2 className="section-title">Get In Touch</h2>
         
@@ -61,7 +58,7 @@ const ContactSection = () => {
                   </div>
                   <div>
                     <p className="text-sm text-gray-400">Email</p>
-                    <p className="text-gray-300">zain.abbas@example.com</p>
+                    <p className="text-gray-300">zainabbasm416@gmail.com</p>
                   </div>
                 </div>
                 
@@ -71,7 +68,7 @@ const ContactSection = () => {
                   </div>
                   <div>
                     <p className="text-sm text-gray-400">Phone</p>
-                    <p className="text-gray-300">+92-346-4040192</p>
+                    <p className="text-gray-300">+92346-4040192</p>
                   </div>
                 </div>
                 
@@ -103,8 +100,6 @@ const ContactSection = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default ContactSection;
