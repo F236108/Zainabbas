@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,17 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				// Custom colors for Zain's portfolio
+				electric: {
+					DEFAULT: '#33C3F0',
+					muted: '#1EAEDB',
+					dark: '#0EA5E9'
+				},
+				tech: {
+					blue: '#3B82F6',
+					green: '#22C55E',
+					purple: '#8B5CF6'
 				}
 			},
 			borderRadius: {
@@ -84,11 +96,33 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'glow': {
+					'0%, 100%': {
+						boxShadow: '0 0 5px rgba(51, 195, 240, 0.5), 0 0 20px rgba(51, 195, 240, 0.2)'
+					},
+					'50%': {
+						boxShadow: '0 0 15px rgba(51, 195, 240, 0.8), 0 0 30px rgba(51, 195, 240, 0.4)'
+					}
+				},
+				'float': {
+					'0%, 100%': {
+						transform: 'translateY(0)'
+					},
+					'50%': {
+						transform: 'translateY(-10px)'
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'glow': 'glow 3s ease-in-out infinite',
+				'float': 'float 6s ease-in-out infinite'
+			},
+			backgroundImage: {
+				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+				'hero-pattern': 'linear-gradient(to right bottom, rgba(13, 17, 23, 0.9), rgba(13, 17, 23, 0.9))'
 			}
 		}
 	},
