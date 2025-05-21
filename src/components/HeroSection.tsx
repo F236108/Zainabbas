@@ -115,7 +115,7 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 1.1 }}
           >
             <div className="text-center">
-              <h3 className="text-electric text-3xl font-bold">3+</h3>
+              <h3 className="text-electric text-3xl font-bold">2+</h3>
               <p className="text-sm text-gray-400">Years Experience</p>
             </div>
             <div className="text-center">

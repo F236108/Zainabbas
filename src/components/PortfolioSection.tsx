@@ -12,7 +12,7 @@ const projects = [
     type: "Programming",
     icon: Code,
     tags: ["C++", "Mathematics", "Algorithm"],
-    image: "https://images.unsplash.com/photo-1587145820266-a5951ee6f620?auto=format&fit=crop&q=80&w=500"
+    image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&q=80&w=500"
   },
   {
     id: 2,
@@ -21,7 +21,7 @@ const projects = [
     type: "Programming",
     icon: Code,
     tags: ["C++", "Data Structures", "File Handling"],
-    image: "https://images.unsplash.com/photo-1586716402203-79219bede43c?auto=format&fit=crop&q=80&w=500"
+    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=500"
   },
   {
     id: 3,
@@ -30,7 +30,7 @@ const projects = [
     type: "Hardware",
     icon: Image,
     tags: ["Circuit Design", "LDR", "Automation"],
-    image: "https://images.unsplash.com/photo-1584984793889-6ac1bbe1a2b3?auto=format&fit=crop&q=80&w=500"
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=500"
   },
   {
     id: 4,
@@ -39,7 +39,7 @@ const projects = [
     type: "Simulation",
     icon: Image,
     tags: ["Multisim", "Electronics", "Timing Circuits"],
-    image: "https://images.unsplash.com/photo-1577124999548-27478542c8c5?auto=format&fit=crop&q=80&w=500"
+    image: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?auto=format&fit=crop&q=80&w=500"
   },
   {
     id: 5,
@@ -48,7 +48,7 @@ const projects = [
     type: "Hardware & Programming",
     icon: Image,
     tags: ["Robotics", "Motors", "Sensors"],
-    image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=500"
+    image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&q=80&w=500"
   },
   {
     id: 6,
@@ -57,7 +57,7 @@ const projects = [
     type: "Hardware",
     icon: FileText,
     tags: ["Electromagnetics", "Power Systems", "Education"],
-    image: "https://images.unsplash.com/photo-1631019553258-63f8a69b2d1b?auto=format&fit=crop&q=80&w=500"
+    image: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?auto=format&fit=crop&q=80&w=500"
   }
 ];
 
