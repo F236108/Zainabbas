@@ -368,17 +368,24 @@ const HeroSection = () => {
                 transition: { duration: 0.2, ease: "easeOut" }
               }}
               initial={{ opacity: 0, x: -50, rotate: -10 }}
-              animate={{ opacity: 1, x: 0, rotate: 0 }}
-              transition={{ delay: 1.5, duration: 0.8, ease: "easeOut" }}
+              animate={{ 
+                opacity: 1, 
+                x: 0, 
+                rotate: 0,
+                y: [-10, 10, -10],
+                transition: {
+                  opacity: { delay: 1.5, duration: 0.8, ease: "easeOut" },
+                  x: { delay: 1.5, duration: 0.8, ease: "easeOut" },
+                  rotate: { delay: 1.5, duration: 0.8, ease: "easeOut" },
+                  y: { duration: 4, ease: "easeInOut", repeat: Infinity, repeatType: "loop" as const }
+                }
+              }}
             >
               <span className="text-2xl font-bold text-electric">C++</span>
             </motion.div>
             
             <motion.div 
               className="absolute bottom-10 -right-5 w-16 h-16 bg-secondary rounded-lg flex items-center justify-center shadow-lg border border-electric/20"
-              variants={floatingVariants}
-              animate="animate"
-              style={{ animationDelay: '2s' }}
               whileHover={{ 
                 scale: 1.15, 
                 rotate: -10,
@@ -386,8 +393,18 @@ const HeroSection = () => {
                 transition: { duration: 0.2, ease: "easeOut" }
               }}
               initial={{ opacity: 0, x: 50, rotate: 10 }}
-              animate={{ opacity: 1, x: 0, rotate: 0 }}
-              transition={{ delay: 1.7, duration: 0.8, ease: "easeOut" }}
+              animate={{ 
+                opacity: 1, 
+                x: 0, 
+                rotate: 0,
+                y: [-10, 10, -10],
+                transition: {
+                  opacity: { delay: 1.7, duration: 0.8, ease: "easeOut" },
+                  x: { delay: 1.7, duration: 0.8, ease: "easeOut" },
+                  rotate: { delay: 1.7, duration: 0.8, ease: "easeOut" },
+                  y: { delay: 2, duration: 4, ease: "easeInOut", repeat: Infinity, repeatType: "loop" as const }
+                }
+              }}
             >
               <motion.span 
                 className="text-electric text-2xl"
