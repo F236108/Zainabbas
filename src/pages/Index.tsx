@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
@@ -7,6 +6,7 @@ import PortfolioSection from '@/components/PortfolioSection';
 import ServicesSection from '@/components/ServicesSection';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
+import AdminResumeUpload from '@/components/AdminResumeUpload';
 
 const Index = () => {
   // Smooth scroll implementation
@@ -47,6 +47,7 @@ const Index = () => {
       <ServicesSection />
       <ContactSection />
       <Footer />
+      <AdminResumeUpload />
     </div>
   );
 };
