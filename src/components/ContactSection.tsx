@@ -28,10 +28,10 @@ const ContactSection = () => {
     setIsSubmitting(true);
     
     try {
-      // Replace these with your actual EmailJS credentials
-      const serviceId = 'YOUR_SERVICE_ID';
-      const templateId = 'YOUR_TEMPLATE_ID';
-      const publicKey = 'YOUR_PUBLIC_KEY';
+      // Your actual EmailJS credentials
+      const serviceId = 'service_j8l41wf';
+      const templateId = 'template_bp7z2qf';
+      const publicKey = 'WX1UPTBbx2X1pZC9h';
       
       const templateParams = {
         from_name: formData.name,
