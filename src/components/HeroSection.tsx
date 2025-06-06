@@ -2,7 +2,6 @@
 import { motion } from 'framer-motion';
 import { Github, Linkedin, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import ResumeDownload from './ResumeDownload';
 
 const HeroSection = () => {
   const containerVariants = {
@@ -81,7 +80,13 @@ const HeroSection = () => {
             className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
             variants={itemVariants}
           >
-            <ResumeDownload />
+            <Button
+              size="lg"
+              className="bg-electric hover:bg-electric/90 text-primary-foreground transition-all duration-300"
+              onClick={() => document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              View My Work
+            </Button>
             <Button
               variant="outline"
               size="lg"
