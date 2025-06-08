@@ -138,7 +138,6 @@ const Navbar = () => {
                 variant="outline"
                 size="sm"
                 className="ml-4 border-electric text-electric hover:bg-electric hover:text-primary-foreground transition-all duration-300"
-                onClick={() => window.open('https://github.com/F236108', '_blank')}
               >
                 <Github className="mr-2 h-4 w-4" />
                 GitHub
@@ -211,7 +210,6 @@ const Navbar = () => {
             <Button
               variant="outline"
               className="border-electric text-electric hover:bg-electric hover:text-primary-foreground transition-all duration-300"
-              onClick={() => window.open('https://github.com/F236108', '_blank')}
             >
               <Github className="mr-2 h-4 w-4" />
               GitHub

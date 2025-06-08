@@ -2,11 +2,10 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Mail, Phone, Linkedin, Instagram, Send, Github } from 'lucide-react';
+import { Mail, Phone, Linkedin, Instagram, Send } from 'lucide-react';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useToast } from '@/components/ui/use-toast';
-import emailjs from '@emailjs/browser';
 
 const ContactSection = () => {
   const { toast } = useToast();
@@ -23,48 +22,25 @@ const ContactSection = () => {
     setFormData(prev => ({ ...prev, [id]: value }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    try {
-      // Your actual EmailJS credentials
-      const serviceId = 'service_j8l41wf';
-      const templateId = 'template_bp7z2qf';
-      const publicKey = 'WX1UPTBbx2X1pZC9h';
-      
-      const templateParams = {
-        from_name: formData.name,
-        from_email: formData.email,
-        subject: formData.subject,
-        message: formData.message,
-        to_name: 'Zain Abbas',
-      };
-
-      await emailjs.send(serviceId, templateId, templateParams, publicKey);
-      
+    // Simulate form submission
+    setTimeout(() => {
+      setIsSubmitting(false);
       toast({
-        title: "Message Sent Successfully!",
+        title: "Message Sent",
         description: "Thanks for your message! I'll get back to you soon.",
         variant: "default",
       });
-      
       setFormData({
         name: '',
         email: '',
         subject: '',
         message: ''
       });
-    } catch (error) {
-      console.error('EmailJS error:', error);
-      toast({
-        title: "Failed to Send Message",
-        description: "Please try again or contact me directly via email.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
+    }, 1500);
   };
 
   const containerVariants = {
@@ -183,7 +159,6 @@ const ContactSection = () => {
               </p>
               
               <div className="space-y-4">
-                {/* University Email */}
                 <motion.div 
                   className="flex items-center transform transition-all duration-300 hover:translate-x-2"
                   whileHover={{ scale: 1.02 }}
@@ -192,32 +167,9 @@ const ContactSection = () => {
                     <Mail className="h-5 w-5 text-electric" />
                   </div>
                   <div>
-                    <p className="text-sm text-gray-400">University Email</p>
-                    <a 
-                      href="mailto:F236108@cfd.nu.edu.pk" 
-                      className="text-gray-300 hover:text-electric transition-colors"
-                    >
-                      F236108@cfd.nu.edu.pk
-                    </a>
-                  </div>
-                </motion.div>
-
-                {/* Personal Email */}
-                <motion.div 
-                  className="flex items-center transform transition-all duration-300 hover:translate-x-2"
-                  whileHover={{ scale: 1.02 }}
-                >
-                  <div className="w-10 h-10 rounded-full bg-electric/20 flex items-center justify-center mr-4">
-                    <Mail className="h-5 w-5 text-electric" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-400">Personal Email</p>
-                    <a 
-                      href="mailto:zainabbasm416@gmail.com" 
-                      className="text-gray-300 hover:text-electric transition-colors"
-                    >
-                      zainabbasm416@gmail.com
-                    </a>
+                    <p className="text-sm text-gray-400">Email</p>
+                    <p className="text-gray-300">zainabbasm416@gmail.com</p>
+                    <p className="text-gray-300">F236108@cfd.nu.edu.pk</p>
                   </div>
                 </motion.div>
                 
@@ -230,33 +182,7 @@ const ContactSection = () => {
                   </div>
                   <div>
                     <p className="text-sm text-gray-400">Phone</p>
-                    <a 
-                      href="tel:+923464040192" 
-                      className="text-gray-300 hover:text-electric transition-colors"
-                    >
-                      +92-346-4040192
-                    </a>
-                  </div>
-                </motion.div>
-
-                {/* GitHub */}
-                <motion.div 
-                  className="flex items-center transform transition-all duration-300 hover:translate-x-2"
-                  whileHover={{ scale: 1.02 }}
-                >
-                  <div className="w-10 h-10 rounded-full bg-electric/20 flex items-center justify-center mr-4">
-                    <Github className="h-5 w-5 text-electric" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-400">GitHub</p>
-                    <a 
-                      href="https://github.com/F236108" 
-                      className="text-electric hover:underline transition-colors" 
-                      target="_blank" 
-                      rel="noreferrer"
-                    >
-                      github.com/F236108
-                    </a>
+                    <p className="text-gray-300">+92346-4040192</p>
                   </div>
                 </motion.div>
                 
@@ -269,13 +195,8 @@ const ContactSection = () => {
                   </div>
                   <div>
                     <p className="text-sm text-gray-400">LinkedIn</p>
-                    <a 
-                      href="https://www.linkedin.com/in/zain-abbas102" 
-                      className="text-electric hover:underline transition-colors" 
-                      target="_blank" 
-                      rel="noreferrer"
-                    >
-                      zain-abbas102
+                    <a href="https://www.linkedin.com/in/zain-abbas102" className="text-electric hover:underline" target="_blank" rel="noreferrer">
+                      www.linkedin.com/in/zain-abbas102
                     </a>
                   </div>
                 </motion.div>
@@ -289,12 +210,7 @@ const ContactSection = () => {
                   </div>
                   <div>
                     <p className="text-sm text-gray-400">Instagram</p>
-                    <a 
-                      href="https://www.instagram.com/zain_abbas02" 
-                      className="text-electric hover:underline transition-colors" 
-                      target="_blank" 
-                      rel="noreferrer"
-                    >
+                    <a href="https://www.instagram.com/zain_abbas02" className="text-electric hover:underline" target="_blank" rel="noreferrer">
                       @zain_abbas02
                     </a>
                   </div>

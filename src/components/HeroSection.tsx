@@ -1,161 +1,208 @@
 
-import { motion } from 'framer-motion';
-import { Github, Linkedin, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { motion } from 'framer-motion';
+import { ArrowRight, Download } from 'lucide-react';
 
 const HeroSection = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.3,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { y: 50, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 12,
-      },
-    },
-  };
-
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-background to-secondary/20 relative overflow-hidden">
-      <div className="absolute inset-0 bg-grid-pattern opacity-5" />
-      
-      <div className="container mx-auto px-4 relative z-10">
-        <motion.div
-          className="text-center max-w-4xl mx-auto"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
+    <section 
+      id="home" 
+      className="relative min-h-screen flex items-center py-20 overflow-hidden"
+      style={{
+        backgroundImage: "linear-gradient(to right bottom, rgba(13, 17, 23, 0.9), rgba(13, 17, 23, 0.9))"
+      }}
+    >
+      {/* Background Elements */}
+      <div className="absolute inset-0 -z-10">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.2 }}
+          className="absolute top-20 right-[10%] w-64 h-64 rounded-full bg-electric/10 blur-3xl animate-float" 
+        />
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.2, delay: 0.3 }}
+          className="absolute bottom-20 left-[10%] w-80 h-80 rounded-full bg-tech-purple/10 blur-3xl animate-float" 
+          style={{ animationDelay: '2s' }} 
+        />
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.2, delay: 0.6 }}
+          className="absolute top-40 left-1/4 w-40 h-40 rounded-full bg-tech-blue/10 blur-3xl animate-float" 
+          style={{ animationDelay: '1s' }} 
+        />
+      </div>
+
+      <div className="container mx-auto px-4 flex flex-col lg:flex-row items-center">
+        {/* Text Content */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="lg:w-1/2 lg:pr-8 text-center lg:text-left"
         >
-          <motion.div variants={itemVariants}>
-            <div className="mb-8">
-              <motion.img
-                src="/placeholder.svg"
-                alt="Zain Abbas"
-                className="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-electric shadow-2xl"
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              />
-            </div>
-          </motion.div>
+          <motion.span 
+            className="inline-block px-4 py-1 rounded-full bg-electric/10 text-electric mb-4 text-sm font-medium"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            Electrical Engineering Student
+          </motion.span>
 
           <motion.h1 
-            className="text-5xl md:text-7xl font-bold mb-6"
-            variants={itemVariants}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="mb-4"
           >
-            Hi, I'm{' '}
-            <span className="text-electric bg-gradient-to-r from-electric to-blue-400 bg-clip-text text-transparent">
-              Zain Abbas
-            </span>
+            <span className="block text-5xl md:text-6xl lg:text-7xl font-bold">Zain Abbas</span>
+            <span className="block text-gradient text-2xl md:text-3xl lg:text-4xl mt-2">Innovating Through Technology</span>
           </motion.h1>
-
-          <motion.p 
-            className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed"
-            variants={itemVariants}
-          >
-            Full Stack Developer & UI/UX Enthusiast
-          </motion.p>
-
-          <motion.p 
-            className="text-lg text-muted-foreground mb-12 max-w-3xl mx-auto"
-            variants={itemVariants}
-          >
-            I craft digital experiences that blend beautiful design with powerful functionality. 
-            Passionate about creating solutions that make a difference.
-          </motion.p>
-
+          
           <motion.div 
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
-            variants={itemVariants}
+            initial={{ width: 0 }}
+            animate={{ width: "80px" }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="h-1 bg-electric mx-auto lg:mx-0 my-6"
+          ></motion.div>
+          
+          <motion.p 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.7 }}
+            className="mb-8 text-lg md:text-xl text-gray-300 max-w-xl mx-auto lg:mx-0"
           >
-            <Button
-              size="lg"
-              className="bg-electric hover:bg-electric/90 text-primary-foreground transition-all duration-300"
+            Turning complex engineering challenges into <span className="text-highlight">innovative solutions</span> through circuit design and programming expertise at FAST National University.
+          </motion.p>
+          
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.9 }}
+            className="flex flex-wrap gap-4 justify-center lg:justify-start"
+          >
+            <Button 
+              className="bg-electric hover:bg-electric-dark text-black font-medium transition-all duration-300 transform hover:scale-105 flex items-center gap-2"
               onClick={() => document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' })}
             >
-              View My Work
+              View Portfolio
+              <ArrowRight className="h-4 w-4" />
             </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className="border-electric text-electric hover:bg-electric hover:text-primary-foreground transition-all duration-300"
+            <Button 
+              variant="outline" 
+              className="border-electric text-electric hover:bg-electric/10 transition-all duration-300 transform hover:scale-105"
               onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
             >
-              Let's Talk
+              Contact Me
+            </Button>
+            <Button 
+              variant="ghost" 
+              className="text-white hover:bg-white/5 transition-all duration-300 transform hover:scale-105 flex items-center gap-2"
+            >
+              Resume <Download className="h-4 w-4" />
             </Button>
           </motion.div>
 
+          {/* Social Stats */}
           <motion.div 
-            className="flex justify-center space-x-6"
-            variants={itemVariants}
+            className="mt-10 flex justify-center lg:justify-start gap-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 1.1 }}
           >
-            <motion.a
-              href="https://github.com/F236108"
-              target="_blank"
-              rel="noreferrer"
-              className="text-muted-foreground hover:text-electric transition-colors p-2"
-              whileHover={{ scale: 1.2, rotate: 5 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <Github className="h-6 w-6" />
-            </motion.a>
-            <motion.a
-              href="https://www.linkedin.com/in/zain-abbas102"
-              target="_blank"
-              rel="noreferrer"
-              className="text-muted-foreground hover:text-electric transition-colors p-2"
-              whileHover={{ scale: 1.2, rotate: -5 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <Linkedin className="h-6 w-6" />
-            </motion.a>
-            <motion.a
-              href="mailto:zainabbasm416@gmail.com"
-              className="text-muted-foreground hover:text-electric transition-colors p-2"
-              whileHover={{ scale: 1.2, rotate: 5 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <Mail className="h-6 w-6" />
-            </motion.a>
+            <div className="text-center">
+              <h3 className="text-electric text-3xl font-bold">2+</h3>
+              <p className="text-sm text-gray-400">Years Experience</p>
+            </div>
+            <div className="text-center">
+              <h3 className="text-electric text-3xl font-bold">6+</h3>
+              <p className="text-sm text-gray-400">Projects</p>
+            </div>
+            <div className="text-center">
+              <h3 className="text-electric text-3xl font-bold">100%</h3>
+              <p className="text-sm text-gray-400">Client Satisfaction</p>
+            </div>
           </motion.div>
         </motion.div>
+        
+        {/* Profile Image */}
+        <motion.div 
+          initial={{ opacity: 0, x: 30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1, delay: 0.3 }}
+          className="lg:w-1/2 mt-12 lg:mt-0 flex justify-center"
+        >
+          <div className="relative">
+            <motion.div 
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+              className="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-electric/20 animate-glow relative z-10"
+              whileHover={{ scale: 1.05 }}
+            >
+              <img 
+                src="https://i.postimg.cc/j2dxy1vN/2.jpg"
+                alt="Zain Abbas" 
+                className="w-full h-full object-cover"
+              />
+            </motion.div>
+            
+            {/* Decorative elements */}
+            <motion.div 
+              className="absolute -z-10 inset-0 blur-2xl bg-electric/20 rounded-full"
+              animate={{ 
+                boxShadow: ['0 0 20px 5px rgba(51, 195, 240, 0.3)', '0 0 40px 10px rgba(51, 195, 240, 0.5)', '0 0 20px 5px rgba(51, 195, 240, 0.3)']
+              }}
+              transition={{ 
+                duration: 3, 
+                repeat: Infinity,
+                repeatType: "reverse"
+              }}
+            />
+            
+            {/* Floating tech icons */}
+            <motion.div 
+              className="absolute top-5 -left-10 w-16 h-16 bg-secondary rounded-lg flex items-center justify-center shadow-lg border border-electric/20"
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 1.2, duration: 0.5 }}
+              whileHover={{ scale: 1.1, rotate: 5 }}
+            >
+              <span className="text-2xl font-bold text-electric">C++</span>
+            </motion.div>
+            
+            <motion.div 
+              className="absolute bottom-10 -right-5 w-16 h-16 bg-secondary rounded-lg flex items-center justify-center shadow-lg border border-electric/20"
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 1.4, duration: 0.5 }}
+              whileHover={{ scale: 1.1, rotate: -5 }}
+            >
+              <span className="text-electric text-2xl">⚡</span>
+            </motion.div>
+          </div>
+        </motion.div>
       </div>
-
-      {/* Floating particles animation */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(6)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-2 h-2 bg-electric/20 rounded-full"
-            animate={{
-              x: [0, 100, 0],
-              y: [0, -100, 0],
-              opacity: [0, 1, 0],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              delay: i * 1.3,
-            }}
-            style={{
-              left: `${20 + i * 15}%`,
-              top: `${30 + i * 10}%`,
-            }}
-          />
-        ))}
-      </div>
+      
+      {/* Scroll indicator */}
+      <motion.div 
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2" 
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 2, duration: 1 }}
+      >
+        <motion.div 
+          className="w-8 h-12 rounded-full border-2 border-electric flex justify-center pt-2"
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity }}
+        >
+          <motion.div className="w-1 h-3 bg-electric rounded-full" />
+        </motion.div>
+      </motion.div>
     </section>
   );
 };

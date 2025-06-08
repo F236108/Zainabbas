@@ -13,7 +13,7 @@ const Footer = () => {
           </a>
           
           <div className="flex space-x-6 mb-8">
-            <a href="https://github.com/F236108" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-electric transition-colors">
+            <a href="https://github.com" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-electric transition-colors">
               <Github className="h-5 w-5" />
             </a>
             <a href="https://www.linkedin.com/in/zain-abbas102" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-electric transition-colors">
@@ -22,7 +22,7 @@ const Footer = () => {
             <a href="https://www.instagram.com/zain_abbas02" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-electric transition-colors">
               <Instagram className="h-5 w-5" />
             </a>
-            <a href="mailto:zainabbasm416@gmail.com" className="text-gray-400 hover:text-electric transition-colors">
+            <a href="mailto:zain.abbas@example.com" className="text-gray-400 hover:text-electric transition-colors">
               <Mail className="h-5 w-5" />
             </a>
           </div>
