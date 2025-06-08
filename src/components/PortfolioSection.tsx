@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Code, Image, FileText, ExternalLink, Github } from 'lucide-react';
@@ -12,7 +11,7 @@ const projects = [
     type: "Programming",
     icon: Code,
     tags: ["C++", "Mathematics", "Algorithm"],
-    image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&q=80&w=500"
+    image: "/lovable-uploads/c2c6b82f-a364-45ad-9185-fba44ec51cc3.png"
   },
   {
     id: 2,
@@ -30,7 +29,7 @@ const projects = [
     type: "Hardware",
     icon: Image,
     tags: ["Circuit Design", "LDR", "Automation"],
-    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=500"
+    image: "/lovable-uploads/2310bf25-5020-460f-a321-c77665083e59.png"
   },
   {
     id: 4,
@@ -39,7 +38,7 @@ const projects = [
     type: "Simulation",
     icon: Image,
     tags: ["Multisim", "Electronics", "Timing Circuits"],
-    image: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?auto=format&fit=crop&q=80&w=500"
+    image: "/lovable-uploads/5fd94d76-0a1f-4a7c-8b1d-315587890b70.png"
   },
   {
     id: 5,
@@ -48,7 +47,7 @@ const projects = [
     type: "Hardware & Programming",
     icon: Image,
     tags: ["Robotics", "Motors", "Sensors"],
-    image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&q=80&w=500"
+    image: "/lovable-uploads/e6e89a7e-5dfa-4c0d-b136-9ad6f4b3e23b.png"
   },
   {
     id: 6,
@@ -57,7 +56,7 @@ const projects = [
     type: "Hardware",
     icon: FileText,
     tags: ["Electromagnetics", "Power Systems", "Education"],
-    image: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?auto=format&fit=crop&q=80&w=500"
+    image: "/lovable-uploads/4f7799d8-efc7-46a6-90c4-df91c346a78d.png"
   }
 ];
 
