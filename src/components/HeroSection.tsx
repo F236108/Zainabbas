@@ -1,9 +1,88 @@
-
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 import { ArrowRight, Download } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/components/ui/use-toast';
+
+interface Resume {
+  id: string;
+  filename: string;
+  file_path: string;
+  content_type: string;
+  file_size: number;
+  uploaded_at: string;
+  is_current: boolean;
+}
 
 const HeroSection = () => {
+  const [currentResume, setCurrentResume] = useState<Resume | null>(null);
+  const { toast } = useToast();
+
+  useEffect(() => {
+    fetchCurrentResume();
+  }, []);
+
+  const fetchCurrentResume = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('resumes')
+        .select('*')
+        .eq('is_current', true)
+        .single();
+
+      if (error && error.code !== 'PGRST116') { // PGRST116 is "not found"
+        console.error('Error fetching current resume:', error);
+        return;
+      }
+
+      setCurrentResume(data);
+    } catch (error) {
+      console.error('Error fetching current resume:', error);
+    }
+  };
+
+  const handleResumeDownload = async () => {
+    if (!currentResume) {
+      toast({
+        title: "No Resume Available",
+        description: "No resume is currently available for download.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    try {
+      const { data, error } = await supabase.storage
+        .from('resumes')
+        .download(currentResume.file_path);
+
+      if (error) throw error;
+
+      // Create download link
+      const url = URL.createObjectURL(data);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = currentResume.filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+
+      toast({
+        title: "Download Started",
+        description: "Resume download has started.",
+      });
+    } catch (error) {
+      console.error('Error downloading resume:', error);
+      toast({
+        title: "Download Failed",
+        description: "Failed to download resume. Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
+
   // Enhanced animation variants for smoother 60fps transitions
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -241,6 +320,7 @@ const HeroSection = () => {
               <Button 
                 variant="ghost" 
                 className="text-white hover:bg-white/5 transition-all duration-300 flex items-center gap-2"
+                onClick={handleResumeDownload}
               >
                 Resume 
                 <motion.div
