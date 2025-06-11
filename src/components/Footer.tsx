@@ -1,5 +1,6 @@
 
 import { Github, Linkedin, Instagram, Mail } from 'lucide-react';
+import CVManager from './CVManager';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -11,6 +12,11 @@ const Footer = () => {
           <a href="#home" className="text-electric text-2xl font-bold mb-6">
             Zain<span className="text-white">Abbas</span>
           </a>
+          
+          {/* CV Management Section */}
+          <div className="w-full max-w-2xl mb-8">
+            <CVManager />
+          </div>
           
           <div className="flex space-x-6 mb-8">
             <a href="https://github.com/F236108" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-electric transition-colors">
