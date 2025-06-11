@@ -2,9 +2,10 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Upload, Download, Trash2, FileText } from 'lucide-react';
+import { Upload, Download, Trash2, FileText, ChevronDown, ChevronUp } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/components/ui/use-toast';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 
 interface Resume {
   id: string;
@@ -22,6 +23,7 @@ const CVManager = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [adminPassword, setAdminPassword] = useState('');
   const [showAdminPanel, setShowAdminPanel] = useState(false);
+  const [isAdminSectionOpen, setIsAdminSectionOpen] = useState(false);
   const { toast } = useToast();
 
   // Simple admin authentication - in production, use proper auth
@@ -29,7 +31,33 @@ const CVManager = () => {
 
   useEffect(() => {
     fetchResumes();
+    createBucketIfNotExists();
   }, []);
+
+  const createBucketIfNotExists = async () => {
+    try {
+      // Check if bucket exists
+      const { data: buckets } = await supabase.storage.listBuckets();
+      const resumesBucket = buckets?.find(bucket => bucket.name === 'resumes');
+      
+      if (!resumesBucket) {
+        // Create bucket if it doesn't exist
+        const { error } = await supabase.storage.createBucket('resumes', {
+          public: true,
+          allowedMimeTypes: ['application/pdf'],
+          fileSizeLimit: 10485760 // 10MB
+        });
+        
+        if (error) {
+          console.error('Error creating bucket:', error);
+        } else {
+          console.log('Resumes bucket created successfully');
+        }
+      }
+    } catch (error) {
+      console.error('Error checking/creating bucket:', error);
+    }
+  };
 
   const fetchResumes = async () => {
     try {
@@ -77,19 +105,39 @@ const CVManager = () => {
       return;
     }
 
+    // Validate file size (10MB limit)
+    if (file.size > 10485760) {
+      toast({
+        title: "File Too Large",
+        description: "Please upload a file smaller than 10MB.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsUploading(true);
 
     try {
       // Upload file to storage
       const fileExt = file.name.split('.').pop();
       const fileName = `cv_${Date.now()}.${fileExt}`;
-      const filePath = `${fileName}`;
+      const filePath = fileName;
+
+      console.log('Uploading file:', { fileName, filePath, fileSize: file.size });
 
       const { error: uploadError } = await supabase.storage
         .from('resumes')
-        .upload(filePath, file);
+        .upload(filePath, file, {
+          cacheControl: '3600',
+          upsert: false
+        });
 
-      if (uploadError) throw uploadError;
+      if (uploadError) {
+        console.error('Upload error:', uploadError);
+        throw uploadError;
+      }
+
+      console.log('File uploaded successfully');
 
       // Mark all previous resumes as not current
       await supabase
@@ -108,7 +156,12 @@ const CVManager = () => {
           is_current: true,
         });
 
-      if (insertError) throw insertError;
+      if (insertError) {
+        console.error('Insert error:', insertError);
+        throw insertError;
+      }
+
+      console.log('Resume record inserted successfully');
 
       toast({
         title: "CV Uploaded Successfully",
@@ -120,7 +173,7 @@ const CVManager = () => {
       console.error('Error uploading CV:', error);
       toast({
         title: "Upload Failed",
-        description: "Failed to upload CV. Please try again.",
+        description: `Failed to upload CV: ${error.message}`,
         variant: "destructive",
       });
     } finally {
@@ -222,117 +275,131 @@ const CVManager = () => {
         )}
       </div>
 
-      {/* Admin Access */}
-      {!isAdmin && (
-        <div className="border-t border-muted pt-4">
-          <h4 className="text-sm font-medium text-gray-400 mb-2">Admin Access</h4>
-          <div className="flex gap-2">
-            <Input
-              type="password"
-              placeholder="Admin password"
-              value={adminPassword}
-              onChange={(e) => setAdminPassword(e.target.value)}
-              className="bg-background border-muted"
-              onKeyPress={(e) => e.key === 'Enter' && handleAdminLogin()}
-            />
-            <Button
-              onClick={handleAdminLogin}
-              variant="outline"
-              className="border-electric text-electric hover:bg-electric hover:text-black"
-            >
-              Login
-            </Button>
-          </div>
-        </div>
-      )}
-
-      {/* Admin Panel */}
-      {isAdmin && showAdminPanel && (
-        <div className="border-t border-muted pt-4">
-          <h4 className="text-sm font-medium text-gray-400 mb-4">Admin Panel</h4>
-          
-          {/* Upload Section */}
-          <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-300 mb-2">
-              Upload New CV
-            </label>
-            <div className="flex items-center gap-2">
-              <Input
-                type="file"
-                accept=".pdf"
-                onChange={handleFileUpload}
-                disabled={isUploading}
-                className="bg-background border-muted"
-              />
-              {isUploading && (
-                <span className="text-sm text-electric">Uploading...</span>
-              )}
-            </div>
-            <p className="text-xs text-gray-400 mt-1">
-              Only PDF files are allowed. Maximum file size: 10MB
-            </p>
-          </div>
-
-          {/* CV List */}
-          {resumes.length > 0 && (
-            <div>
-              <h5 className="text-sm font-medium text-gray-300 mb-2">Manage CVs</h5>
-              <div className="space-y-2">
-                {resumes.map((resume) => (
-                  <div
-                    key={resume.id}
-                    className="flex items-center justify-between p-3 bg-background rounded border border-muted"
-                  >
-                    <div className="flex-1">
-                      <p className="text-sm font-medium text-gray-200">
-                        {resume.filename}
-                        {resume.is_current && (
-                          <span className="ml-2 px-2 py-1 text-xs bg-electric text-black rounded">
-                            Current
-                          </span>
-                        )}
-                      </p>
-                      <p className="text-xs text-gray-400">
-                        Uploaded: {new Date(resume.uploaded_at).toLocaleDateString()}
-                        {resume.file_size && ` • ${Math.round(resume.file_size / 1024)} KB`}
-                      </p>
-                    </div>
-                    <div className="flex gap-2">
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        onClick={() => handleDownload(resume)}
-                        className="border-electric text-electric hover:bg-electric hover:text-black"
-                      >
-                        <Download className="h-3 w-3" />
-                      </Button>
-                      <Button
-                        size="sm"
-                        variant="destructive"
-                        onClick={() => handleDelete(resume.id, resume.file_path)}
-                      >
-                        <Trash2 className="h-3 w-3" />
-                      </Button>
-                    </div>
-                  </div>
-                ))}
+      {/* Collapsible Admin Section */}
+      <Collapsible open={isAdminSectionOpen} onOpenChange={setIsAdminSectionOpen}>
+        <CollapsibleTrigger asChild>
+          <Button
+            variant="ghost"
+            className="w-full justify-between border-t border-muted pt-4 hover:bg-muted/50"
+          >
+            <span className="text-sm font-medium text-gray-400">Admin Access</span>
+            {isAdminSectionOpen ? (
+              <ChevronUp className="h-4 w-4 text-gray-400" />
+            ) : (
+              <ChevronDown className="h-4 w-4 text-gray-400" />
+            )}
+          </Button>
+        </CollapsibleTrigger>
+        
+        <CollapsibleContent className="mt-4">
+          {!isAdmin ? (
+            <div className="space-y-2">
+              <div className="flex gap-2">
+                <Input
+                  type="password"
+                  placeholder="Admin password"
+                  value={adminPassword}
+                  onChange={(e) => setAdminPassword(e.target.value)}
+                  className="bg-background border-muted"
+                  onKeyPress={(e) => e.key === 'Enter' && handleAdminLogin()}
+                />
+                <Button
+                  onClick={handleAdminLogin}
+                  variant="outline"
+                  className="border-electric text-electric hover:bg-electric hover:text-black"
+                >
+                  Login
+                </Button>
               </div>
             </div>
-          )}
+          ) : (
+            showAdminPanel && (
+              <div className="space-y-6">
+                {/* Upload Section */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
+                    Upload New CV
+                  </label>
+                  <div className="flex items-center gap-2">
+                    <Input
+                      type="file"
+                      accept=".pdf"
+                      onChange={handleFileUpload}
+                      disabled={isUploading}
+                      className="bg-background border-muted"
+                    />
+                    {isUploading && (
+                      <span className="text-sm text-electric">Uploading...</span>
+                    )}
+                  </div>
+                  <p className="text-xs text-gray-400 mt-1">
+                    Only PDF files are allowed. Maximum file size: 10MB
+                  </p>
+                </div>
 
-          <Button
-            onClick={() => {
-              setIsAdmin(false);
-              setShowAdminPanel(false);
-            }}
-            variant="ghost"
-            className="mt-4 text-gray-400 hover:text-white"
-            size="sm"
-          >
-            Logout Admin
-          </Button>
-        </div>
-      )}
+                {/* CV List */}
+                {resumes.length > 0 && (
+                  <div>
+                    <h5 className="text-sm font-medium text-gray-300 mb-2">Manage CVs</h5>
+                    <div className="space-y-2">
+                      {resumes.map((resume) => (
+                        <div
+                          key={resume.id}
+                          className="flex items-center justify-between p-3 bg-background rounded border border-muted"
+                        >
+                          <div className="flex-1">
+                            <p className="text-sm font-medium text-gray-200">
+                              {resume.filename}
+                              {resume.is_current && (
+                                <span className="ml-2 px-2 py-1 text-xs bg-electric text-black rounded">
+                                  Current
+                                </span>
+                              )}
+                            </p>
+                            <p className="text-xs text-gray-400">
+                              Uploaded: {new Date(resume.uploaded_at).toLocaleDateString()}
+                              {resume.file_size && ` • ${Math.round(resume.file_size / 1024)} KB`}
+                            </p>
+                          </div>
+                          <div className="flex gap-2">
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              onClick={() => handleDownload(resume)}
+                              className="border-electric text-electric hover:bg-electric hover:text-black"
+                            >
+                              <Download className="h-3 w-3" />
+                            </Button>
+                            <Button
+                              size="sm"
+                              variant="destructive"
+                              onClick={() => handleDelete(resume.id, resume.file_path)}
+                            >
+                              <Trash2 className="h-3 w-3" />
+                            </Button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                <Button
+                  onClick={() => {
+                    setIsAdmin(false);
+                    setShowAdminPanel(false);
+                  }}
+                  variant="ghost"
+                  className="text-gray-400 hover:text-white"
+                  size="sm"
+                >
+                  Logout Admin
+                </Button>
+              </div>
+            )
+          )}
+        </CollapsibleContent>
+      </Collapsible>
     </div>
   );
 };
