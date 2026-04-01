@@ -6,6 +6,7 @@ import AboutSection from '@/components/AboutSection';
 import PortfolioSection from '@/components/PortfolioSection';
 import ServicesSection from '@/components/ServicesSection';
 import ContactSection from '@/components/ContactSection';
+import CVManager from '@/components/CVManager';
 import Footer from '@/components/Footer';
 
 const Index = () => {
