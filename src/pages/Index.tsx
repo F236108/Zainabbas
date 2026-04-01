@@ -47,6 +47,11 @@ const Index = () => {
       <PortfolioSection />
       <ServicesSection />
       <ContactSection />
+      <section className="py-12 bg-background">
+        <div className="section-container">
+          <CVManager />
+        </div>
+      </section>
       <Footer />
     </div>
   );

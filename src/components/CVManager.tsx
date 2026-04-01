@@ -173,7 +173,7 @@ const CVManager = () => {
       console.error('Error uploading CV:', error);
       toast({
         title: "Upload Failed",
-        description: `Failed to upload CV: ${error.message}`,
+        description: `Failed to upload CV: ${error instanceof Error ? error.message : 'Unknown error'}`,
         variant: "destructive",
       });
     } finally {
