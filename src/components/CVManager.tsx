@@ -31,33 +31,7 @@ const CVManager = () => {
 
   useEffect(() => {
     fetchResumes();
-    createBucketIfNotExists();
   }, []);
-
-  const createBucketIfNotExists = async () => {
-    try {
-      // Check if bucket exists
-      const { data: buckets } = await supabase.storage.listBuckets();
-      const resumesBucket = buckets?.find(bucket => bucket.name === 'resumes');
-      
-      if (!resumesBucket) {
-        // Create bucket if it doesn't exist
-        const { error } = await supabase.storage.createBucket('resumes', {
-          public: true,
-          allowedMimeTypes: ['application/pdf'],
-          fileSizeLimit: 10485760 // 10MB
-        });
-        
-        if (error) {
-          console.error('Error creating bucket:', error);
-        } else {
-          console.log('Resumes bucket created successfully');
-        }
-      }
-    } catch (error) {
-      console.error('Error checking/creating bucket:', error);
-    }
-  };
 
   const fetchResumes = async () => {
     try {
@@ -173,7 +147,7 @@ const CVManager = () => {
       console.error('Error uploading CV:', error);
       toast({
         title: "Upload Failed",
-        description: `Failed to upload CV: ${error.message}`,
+        description: `Failed to upload CV: ${error instanceof Error ? error.message : 'Unknown error'}`,
         variant: "destructive",
       });
     } finally {

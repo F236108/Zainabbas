@@ -6,6 +6,7 @@ import AboutSection from '@/components/AboutSection';
 import PortfolioSection from '@/components/PortfolioSection';
 import ServicesSection from '@/components/ServicesSection';
 import ContactSection from '@/components/ContactSection';
+import CVManager from '@/components/CVManager';
 import Footer from '@/components/Footer';
 
 const Index = () => {
@@ -46,6 +47,11 @@ const Index = () => {
       <PortfolioSection />
       <ServicesSection />
       <ContactSection />
+      <section className="py-12 bg-background">
+        <div className="section-container">
+          <CVManager />
+        </div>
+      </section>
       <Footer />
     </div>
   );
